@@ -8,12 +8,13 @@ const connection = require("./config/db")
 app.use(express.static(__dirname + "/public"));
 
 app.get("/", (req, res) => {
-  res.redirect("create.html");
+  res.sendFile(__dirname + "/create.html");
 });
 
 app.post("/create", (req, res) => {
     try{
     console.log("create");
+    res.redirect("/");
     }
     catch(err){
     console.log(err);
