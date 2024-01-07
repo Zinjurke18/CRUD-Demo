@@ -33,15 +33,31 @@ app.get("/edit", (req, res) => {
   res.render("editproduct");
 });
 
-app.get("/delete-data", (req, res) => {
-  const deleteData = "delete from " + process.env.TABLE + "where id=?";
-  connection.query(deleteData, [req.query.id], (err, rows) => {
-    if (err) {
-      res.send(err);
-    } else {
-      res.redirect("/data");
-    }
-  });
+// add product to database
+app.post("/add", (req, res) => {
+  const product = req.body.product;
+  const price = req.body.price;
+  const link = req.body.link;
+  try {
+    connection.query(
+      "SELECT count(*) FROM " + process.env.TABLE,
+      (err, result) => {
+        connection.query(
+          "INSERT into " + process.env.TABLE + " values(?,?,?,?)",
+          [result[0]["count(*)"] + 1, product, price, link],
+          (err, rows) => {
+            if (err) {
+              console.log(err);
+            } else {
+              res.redirect("/products");
+            }
+          }
+        );
+      }
+    );
+  } catch (err) {
+    console.log(err);
+  }
 });
 
 app.get("/data", (req, res) => {
@@ -88,28 +104,6 @@ app.post("/final-update", (req, res) => {
         res.redirect("/data");
       }
     });
-  } catch (err) {
-    console.log(err);
-  }
-});
-
-app.post("/create", (req, res) => {
-  console.log(req.body);
-
-  const name = req.body.name;
-  const email = req.body.email;
-  try {
-    connection.query(
-      "INSERT into " + process.env.TABLE + " values(?,?)",
-      [name, email],
-      (err, rows) => {
-        if (err) {
-          console.log(err);
-        } else {
-          res.redirect("/data");
-        }
-      }
-    );
   } catch (err) {
     console.log(err);
   }
