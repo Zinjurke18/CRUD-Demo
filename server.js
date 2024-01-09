@@ -18,7 +18,14 @@ app.get("/", (req, res) => {
 });
 
 app.get("/products", (req, res) => {
-  res.render("products");
+  connection.query("select * from " + process.env.TABLE + ";", (err, rows) => {
+    if (err) {
+      console.log(err);
+    } else {
+      console.log(rows);
+      res.render("products", { rows:rows });
+    }
+  });
 });
 
 app.get("/aboutus", (req, res) => {
