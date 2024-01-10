@@ -22,8 +22,7 @@ app.get("/products", (req, res) => {
     if (err) {
       console.log(err);
     } else {
-      console.log(rows);
-      res.render("products", { rows:rows });
+      res.render("products", { rows: rows });
     }
   });
 });

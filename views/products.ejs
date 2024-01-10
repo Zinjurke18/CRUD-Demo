@@ -1,7 +1,7 @@
 <%- include('partials/header') %>
 
 <div class="grid-card card">
-    <div class="grid">
+    <div class="">
         <% for (var i = 0; i < rows.length; i++) { %>
             <% if ((i + 1) % 4 === 1) { %>
                 <div class="row">
@@ -14,8 +14,8 @@
                         <h5 class="card-title"><%= rows[i].prod_name %></h5>
                         <p class="card-text"><%= rows[i].prod_price %></p>
                         <div class="product_add">
-                            <input type="number" name="qty" placeholder="Quantity" class="form-control qty_text">
-                            <a href="#" class="btn btn-primary add_button">Add</a>
+                            <input type="number" name="qty" placeholder="Quantity" id="qty_text" class="form-control">
+                            <a href="#" class="btn btn-primary" id="add_button">Add</a>
                         </div>
                     </div>
                 </div> 
