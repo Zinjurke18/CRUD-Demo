@@ -66,6 +66,23 @@ app.post("/add", (req, res) => {
   }
 });
 
+// edit product in database
+app.post("/edit", (req, res) => {
+  id = req.body.edit_id;
+  connection.query(
+    "select * from " + process.env.TABLE + " where prod_id=" + id + ";",
+    (err, result) => {
+      {
+        if (err) {
+          console.log(err);
+        } else {
+          res.render("editproduct", { data: result[0] });
+        }
+      }
+    }
+  );
+});
+
 app.get("/data", (req, res) => {
   connection.query("select * from " + process.env.TABLE + ";", (err, rows) => {
     if (err) {

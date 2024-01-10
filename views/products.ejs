@@ -1,7 +1,7 @@
 <%- include('partials/header') %>
 
 <div class="grid-card card">
-    <div class="">
+    <div class="grid">
         <% for (var i = 0; i < rows.length; i++) { %>
             <% if ((i + 1) % 4 === 1) { %>
                 <div class="row">
@@ -9,17 +9,25 @@
                 </div>
             <% } else { %>
                 <div class="card column" style="width: 18rem;">
+                    <form action="/edit" method="POST">
+                        <input type="hidden" name="edit_id" value="<%= rows[i].prod_id %>">
+                        <img src="/images/edit.png" onclick="submit();">
+                    </form>
                     <img class="card-img-top" src="<%= rows[i].prod_link %>" alt="Card image cap">
                     <div class="card-body">
                         <h5 class="card-title"><%= rows[i].prod_name %></h5>
                         <p class="card-text"><%= rows[i].prod_price %></p>
                         <div class="product_add">
-                            <input type="number" name="qty" placeholder="Quantity" id="qty_text" class="form-control">
-                            <a href="#" class="btn btn-primary" id="add_button">Add</a>
+                            <form action="" method="">
+                                <input type="number" name="prod_qty" placeholder="Quantity" id="qty_text" class="form-control">
+                                <a href="#" class="btn btn-primary" id="add_button" name="prod_add_button" value="<%= rows[i].prod_id %>">Add</a>
+                            </form>
                         </div>
                     </div>
                 </div> 
             <% } %>
         <% } %>
+    </div>
+</div>
 
 <%- include('partials/footer') %>
