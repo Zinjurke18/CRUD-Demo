@@ -66,7 +66,7 @@ app.post("/add", (req, res) => {
   }
 });
 
-// edit product in database
+// fetch data for editing
 app.post("/edit", (req, res) => {
   id = req.body.edit_id;
   connection.query(
@@ -83,53 +83,44 @@ app.post("/edit", (req, res) => {
   );
 });
 
-app.get("/data", (req, res) => {
-  connection.query("select * from " + process.env.TABLE + ";", (err, rows) => {
-    if (err) {
-      console.log(err);
-    } else {
-      res.render("read.ejs", { rows });
-    }
-  });
-});
-
-app.get("/update-data", (req, res) => {
+// update product in database
+app.post("/update", (req, res) => {
+  id = req.body.submit_btn;
+  product = req.body.product;
+  price = req.body.price;
+  link = req.body.link;
   connection.query(
-    "select * from " + process.env.TABLE + " where id= ?",
-    [req.query.id],
-    (err, eachRow) => {
-      if (err) {
-        console.log(err);
-      } else {
-        result = JSON.parse(JSON.stringify(eachRow[0]));
-        console.log(result);
-        res.render("edit.ejs", { result });
+    "update " +
+      process.env.TABLE +
+      " set prod_name=?, prod_price=?, prod_link=? where prod_id=?;",
+    [product, price, link, id],
+    (err, result) => {
+      {
+        if (err) {
+          console.log(err);
+        } else {
+          res.redirect("/products");
+        }
       }
     }
   );
 });
 
-app.post("/final-update", (req, res) => {
-  console.log(req.body);
-  const id = req.body.hidden_id;
-  const name = req.body.name;
-  const email = req.body.email;
-
-  console.log("id.....", id);
-
-  const updateQuery =
-    "update " + process.env.TABLE + " set name=?, email=? where id=?";
-  try {
-    connection.query(updateQuery, [name, email, id], (err, rows) => {
-      if (err) {
-        console.log(err);
-      } else {
-        res.redirect("/data");
+// delete product from database
+app.post("/delete", (req, res) => {
+  id = req.body.delete_btn;
+  connection.query(
+    "delete from " + process.env.TABLE + " where prod_id=" + id + ";",
+    (err, result) => {
+      {
+        if (err) {
+          console.log(err);
+        } else {
+          res.redirect("/products");
+        }
       }
-    });
-  } catch (err) {
-    console.log(err);
-  }
+    }
+  );
 });
 
 app.listen(process.env.PORT || 4000, (error) => {

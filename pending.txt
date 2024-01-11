@@ -1,4 +1,7 @@
-fix for loop card issue
-add submit edit form functionality
-create logic to add items to cart
-fix css for products page to show the input box take full space
+fix for loop card issue 
+create logic to add items to cart 
+generate bill page
+home page
+fix css for products page to show the input box take full space - done
+submit edit form functionality - done
+delete item functionality - done

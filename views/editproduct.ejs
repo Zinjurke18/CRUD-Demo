@@ -5,7 +5,7 @@
         <div class="col-md-5">
             <div class="card">
                 <div class="card-body">
-                    <form action="#" method="post">
+                    <form action="/update" id="updateForm" method="POST">
                         <center><h2 id="formheading">Edit Product</h2></center>
                         <div class="form-row">
                             <div class="form-group">
@@ -21,14 +21,26 @@
                             <label for="link">Image Link</label>
                             <input type="text" name="link" class="form-control" id="link" value="<%= data.prod_link %>" placeholder="Paste Link Here" required>
                         </div>
-                        <center>
-                            <button style="margin-top: 1rem;" type="submit" class="btn btn-primary">Submit</button>
-                        </center>
+                        <div class="container" style="text-align: center;">
+                            <button style="margin-top: 1rem; margin-right: 10px;" type="submit" class="btn btn-primary" name="submit_btn" value="<%= data.prod_id %>">Submit</button>
+                            <button style="margin-top: 1rem; margin-left: 10px;" onclick="delete_data()" type="submit" class="btn btn-danger" name="delete_btn" value="<%= data.prod_id %>">Delete</button>
+                        </div>
                     </form>
                 </div>
             </div>
         </div>
     </div>
 </div>
+<script>
+    function delete_data() {
+        // Get the form element
+        var form = document.getElementById('updateForm');
 
+        // Change the form action to the desired route
+        form.action = '/delete';
+
+        // Submit the form
+        form.submit();
+    }
+</script>
 <%- include('partials/footer') %>

@@ -17,7 +17,7 @@
                     <div class="card-body">
                         <h5 class="card-title"><%= rows[i].prod_name %></h5>
                         <p class="card-text"><%= rows[i].prod_price %></p>
-                        <div class="product_add">
+                        <div id="product_add">
                             <form action="" method="">
                                 <input type="number" name="prod_qty" placeholder="Quantity" id="qty_text" class="form-control">
                                 <a href="#" class="btn btn-primary" id="add_button" name="prod_add_button" value="<%= rows[i].prod_id %>">Add</a>

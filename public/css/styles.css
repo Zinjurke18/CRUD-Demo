@@ -47,26 +47,23 @@ footer {
   object-fit: cover;
 }
 
-.product_add {
-  width: 100%;
-  object-fit: cover;
+#product_add {
   display: flex;
-  flex-direction: row;
-  column-gap: 10px;
+  align-items: center;
+  width: 100%;
 }
 
 #qty_text {
-  flex: 1;
-  width: 50%;
+  width: 70%;
   height: 40px;
   padding: 1px;
-  text-align: left;
+  /* text-align: left; */
   display: inline-block;
 }
 
 #add_button {
   display: inline-block;
-  margin: auto;
+  margin: 0 0 3px 8px;
 }
 
 .card.column form img {
