@@ -1,4 +1,6 @@
-fix for loop card issue 
+if products are not present display some message
+fix for loop when 3 items only
+fix for loop card issue where some items are skipped
 create logic to add items to cart 
 generate bill page
 home page

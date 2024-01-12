@@ -50,7 +50,7 @@ app.post("/add", (req, res) => {
       (err, result) => {
         connection.query(
           "INSERT into " + process.env.TABLE + " values(?,?,?,?)",
-          [result[0]["count(*)"] + 1, product, price, link],
+          [(result[0]["count(*)"]+1), product, price, link],
           (err, rows) => {
             if (err) {
               console.log(err);
