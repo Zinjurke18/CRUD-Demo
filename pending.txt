@@ -1,9 +1,8 @@
-if products are not present display some message
-fix for loop when 3 items only
-fix for loop card issue where some items are skipped
 create logic to add items to cart 
 generate bill page
 home page
+if products are not present display some message - done
+fix for loop card issue where some items are skipped - done
 fix css for products page to show the input box take full space - done
 submit edit form functionality - done
 delete item functionality - done
