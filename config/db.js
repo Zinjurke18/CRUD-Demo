@@ -16,7 +16,7 @@ connection.connect((error) => {
 });
 
 // create and use database
-query = "CREATE DATABASE IF NOT EXISTS " + process.env.DATABASE + ";";
+query = "CREATE DATABASE IF NOT EXISTS shop;";
 connection.query(query, function (err, result) {
   if (err) throw err;
   if (result.affectedRows > 0) {
@@ -32,7 +32,8 @@ connection.query(query, function (err, result) {
 });
 
 // create table if not exists
-query = "CREATE TABLE IF NOT EXISTS " + process.env.TABLEDEF + ";";
+query =
+  "CREATE TABLE IF NOT EXISTS products(prod_id INT PRIMARY KEY,prod_name varchar(255), prod_price FLOAT NOT NULL, prod_link VARCHAR(255));";
 connection.query(query, function (err, result) {
   if (err) throw err;
   if (result.affectedRows > 0) {

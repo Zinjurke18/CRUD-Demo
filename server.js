@@ -18,7 +18,7 @@ app.get("/", (req, res) => {
 });
 
 app.get("/products", (req, res) => {
-  connection.query("select * from " + process.env.TABLE + ";", (err, rows) => {
+  connection.query("select * from products;", (err, rows) => {
     if (err) {
       console.log(err);
     } else {
@@ -45,22 +45,19 @@ app.post("/add", (req, res) => {
   const price = req.body.price;
   const link = req.body.link;
   try {
-    connection.query(
-      "SELECT count(*) FROM " + process.env.TABLE,
-      (err, result) => {
-        connection.query(
-          "INSERT into " + process.env.TABLE + " values(?,?,?,?)",
-          [(result[0]["count(*)"]+1), product, price, link],
-          (err, rows) => {
-            if (err) {
-              console.log(err);
-            } else {
-              res.redirect("/products");
-            }
+    connection.query("SELECT count(*) FROM products", (err, result) => {
+      connection.query(
+        "INSERT into products values(?,?,?,?)",
+        [result[0]["count(*)"] + 1, product, price, link],
+        (err, rows) => {
+          if (err) {
+            console.log(err);
+          } else {
+            res.redirect("/products");
           }
-        );
-      }
-    );
+        }
+      );
+    });
   } catch (err) {
     console.log(err);
   }
@@ -70,7 +67,7 @@ app.post("/add", (req, res) => {
 app.post("/edit", (req, res) => {
   id = req.body.edit_id;
   connection.query(
-    "select * from " + process.env.TABLE + " where prod_id=" + id + ";",
+    "select * from products where prod_id=" + id + ";",
     (err, result) => {
       {
         if (err) {
@@ -90,9 +87,7 @@ app.post("/update", (req, res) => {
   price = req.body.price;
   link = req.body.link;
   connection.query(
-    "update " +
-      process.env.TABLE +
-      " set prod_name=?, prod_price=?, prod_link=? where prod_id=?;",
+    "update products set prod_name=?, prod_price=?, prod_link=? where prod_id=?;",
     [product, price, link, id],
     (err, result) => {
       {
@@ -110,7 +105,7 @@ app.post("/update", (req, res) => {
 app.post("/delete", (req, res) => {
   id = req.body.delete_btn;
   connection.query(
-    "delete from " + process.env.TABLE + " where prod_id=" + id + ";",
+    "delete from products where prod_id=" + id + ";",
     (err, result) => {
       {
         if (err) {
