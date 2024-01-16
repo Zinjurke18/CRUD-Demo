@@ -1,0 +1,46 @@
+<%- include('partials/header') %>
+
+<div class="container-form container">
+    <div class="row justify-content-center">
+        <div class="col-md-5">
+            <div class="card">
+                <div class="card-body">
+                    <form action="/update" id="updateForm" method="POST">
+                        <center><h2 id="formheading">Edit Product</h2></center>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="product">Product</label>
+                                <input type="text" name="product" class="form-control" value="<%= data.prod_name %>" id="product" placeholder="Text Here" autofocus required>
+                            </div>
+                            <div class="form-group">
+                                <label for="price">Price</label>
+                                <input type="number" name="price" class="form-control" value="<%= data.prod_price %>" id="price" placeholder="Rs." required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="link">Image Link</label>
+                            <input type="text" name="link" class="form-control" id="link" value="<%= data.prod_link %>" placeholder="Paste Link Here" required>
+                        </div>
+                        <div class="container" style="text-align: center;">
+                            <button style="margin-top: 1rem; margin-right: 10px;" type="submit" class="btn btn-primary" name="submit_btn" value="<%= data.prod_id %>">Update</button>
+                            <button style="margin-top: 1rem; margin-left: 10px;" onclick="delete_data()" type="submit" class="btn btn-danger" name="delete_btn" value="<%= data.prod_id %>">Remove</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    function delete_data() {
+        // Get the form element
+        var form = document.getElementById('updateForm');
+
+        // Change the form action to the desired route
+        form.action = '/delete';
+
+        // Submit the form
+        form.submit();
+    }
+</script>
+<%- include('partials/footer') %>

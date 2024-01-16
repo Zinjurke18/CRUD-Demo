@@ -1,0 +1,24 @@
+<%- include('partials/header') %>
+
+<div class="card" id="grid-card">
+    <% const bill_data=[]; %>
+    <% if (rows.length === 0) { %>
+        <h1>No Products</h1>
+    <% } else { %>
+        <% for (var i = 0; i < rows.length; i++) { %>
+            <div class="card inner-card">
+                <form action="/edit" method="POST">
+                    <input type="hidden" name="edit_id" value="<%= rows[i].prod_id %>">
+                    <img src="/images/pencil.png" onclick="submit();">
+                </form>
+                <img class="card-img-top" src="<%= rows[i].prod_link %>" alt="Card image cap">
+                <div class="card-body">
+                    <h5 class="card-title"><%= rows[i].prod_name %></h5>
+                    <p class="card-text"><%= rows[i].prod_price %></p>
+                </div>
+            </div>
+        <% } %>
+    <% } %>
+</div>
+
+<%- include('partials/footer') %>
